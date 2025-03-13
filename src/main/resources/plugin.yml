@@ -1,0 +1,35 @@
+main: nl.eetgeenappels.YetAnotherHomesPlugin
+name: YetAnotherHomesPlugin
+version: '1.0'
+description: A simple homes plugin with more stuff
+author: eetgeenappels
+api-version: 1.13
+commands:
+  home:
+    description: home command
+  tpa:
+    description: tpa command
+  tpahere:
+    description: tpahere command
+  sethome:
+    description: Command to set a new home at the players current language
+    aliases:
+      - createhome
+      - mkhome
+      - sethome
+  whereis:
+    description: Command to see where your home is located
+  delhome:
+    description: Command to delete a home
+    aliases:
+      - delhome
+      - deletehome
+      - removehome
+      - rmhome
+  homes:
+    description: View all currently set homes
+    aliases:
+      - listhomes
+      - lshomes
+      - lshome
+      - homels
