@@ -3,7 +3,7 @@ plugins {
     kotlin("jvm")
 }
 
-group = "nl.eetgeenappes"
+group = "nl.eetgeenappels"
 version = "0.1"
 
 repositories {
