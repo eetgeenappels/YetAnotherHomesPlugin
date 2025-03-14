@@ -1,9 +1,12 @@
 package nl.eetgeenappels.homes
 
+import nl.eetgeenappels.PREFIX
 import nl.eetgeenappels.YetAnotherHomesPlugin
 import org.bukkit.Bukkit
+import org.bukkit.ChatColor
 import org.bukkit.Location
 import org.bukkit.configuration.file.YamlConfiguration
+import org.bukkit.entity.Player
 import java.io.File
 import java.nio.DoubleBuffer
 import java.util.*
@@ -114,6 +117,17 @@ object Homes {
         }
 
         return homeNames
+    }
+
+    fun teleportToHome(player: Player, home: Home) {
+        player.sendMessage("$PREFIX ${ChatColor.GREEN}Teleporting you to home: ${ChatColor.BLUE}${home.name}")
+
+        // get the world
+        val world = Bukkit.getWorld(home.world)
+
+        val location = Location(world, home.positionX, home.positionY, home.positionZ)
+
+        player.teleport(location)
     }
 
 }

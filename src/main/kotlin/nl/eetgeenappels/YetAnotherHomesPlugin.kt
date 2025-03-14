@@ -1,6 +1,9 @@
 package nl.eetgeenappels
 
 import nl.eetgeenappels.homes.*
+import nl.eetgeenappels.tpa.TPACommand
+import nl.eetgeenappels.tpa.TPAInvites
+import nl.eetgeenappels.tpa.TPAcceptCommand
 import org.bukkit.ChatColor
 import org.bukkit.event.EventHandler
 import org.bukkit.event.player.PlayerJoinEvent
@@ -16,6 +19,7 @@ class YetAnotherHomesPlugin: JavaPlugin() {
         PREFIX = "${ChatColor.DARK_GRAY}[${ChatColor.DARK_RED}Yet${ChatColor.RED}Another${ChatColor.GRAY}Homes${ChatColor.WHITE}Plugin${ChatColor.DARK_GRAY}]${ChatColor.WHITE}"
         setupCommands()
         Homes.loadHomes()
+        startPeriodicTasks()
     }
 
     private fun setupCommands() {
@@ -24,7 +28,9 @@ class YetAnotherHomesPlugin: JavaPlugin() {
             "homes" to HomesCommand(),
             "sethome" to SetHomeCommand(),
             "delhome" to DeleteHomeCommand(),
-            "whereis" to WhereIsCommand()
+            "whereis" to WhereIsCommand(),
+            "tpa" to TPACommand(),
+            "tpaccept" to TPAcceptCommand()
         ).forEach{ (name, executor) ->
             getCommand(name)?.executor = executor
         }
@@ -46,7 +52,7 @@ class YetAnotherHomesPlugin: JavaPlugin() {
     }
 
     private fun onTick() {
-
+        TPAInvites.onTick()
     }
 
     @EventHandler

@@ -34,15 +34,7 @@ class HomeCommand: CommandExecutor {
             return true
         }
 
-        sender.sendMessage("$PREFIX ${ChatColor.GREEN}Teleporting you to home: ${ChatColor.BLUE}$homeName")
-
-        // get the world
-        val world = Bukkit.getWorld(home.world)
-
-        val location = Location(world, home.positionX, home.positionY, home.positionZ)
-
-        sender.teleport(location)
-
+        Homes.teleportToHome(sender, home)
 
         return true
     }
