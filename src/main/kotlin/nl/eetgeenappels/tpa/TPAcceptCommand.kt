@@ -13,6 +13,12 @@ class TPAcceptCommand: CommandExecutor, TabCompleter {
             return true
         }
 
+        if (args.isEmpty()) {
+
+        } else {
+            
+        }
+
         return true
     }
 
