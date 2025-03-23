@@ -22,7 +22,6 @@ class HomesCommand: CommandExecutor {
             sender.sendMessage("$PREFIX ${ChatColor.RED}You are homeless!")
             return true
         }
-
         sender.sendMessage("$PREFIX ${ChatColor.BLUE}Your homes are:")
 
         homes.forEach {

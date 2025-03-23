@@ -46,6 +46,10 @@ object TPAInvites {
         }
     }
 
+    fun getMostRecentInviteTo(player: Player): Invite? {
+        return invites.filter { it.invitePlayer == player }.maxByOrNull { it.creationTime }
+    }
+
     fun onTick() {
         val currentTime = System.nanoTime()
         invites.removeIf { currentTime - it.creationTime > INVITE_EXPIRATION_TIME }
