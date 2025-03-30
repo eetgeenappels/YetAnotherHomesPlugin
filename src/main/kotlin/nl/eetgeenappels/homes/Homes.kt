@@ -29,7 +29,7 @@ object Homes {
         if (playerMap[uuid] == null) {
             playerMap[uuid] = mutableListOf()
         }
-        val home = Home(homeName, location.world.name, location.x, location.y, location.z)
+        val home = Home(homeName, location.world.name, location.x, location.y, location.z, location.yaw, location.pitch)
         playerMap[uuid]?.add(home)
     }
 
@@ -37,10 +37,6 @@ object Homes {
         if (!homeExists(uuid, name))
             return
         playerMap[uuid]?.remove(playerMap[uuid]?.first { it.name == name })
-    }
-
-    fun getHomeLocation(home: Home): Location {
-        return Location(Bukkit.getWorld(home.world), home.positionX, home.positionY, home.positionZ)
     }
 
     fun hasHomes(uuid: UUID): Boolean {
@@ -70,12 +66,16 @@ object Homes {
                 val positionX = home.positionX
                 val positionY = home.positionY
                 val positionZ = home.positionZ
+                val yaw = home.yaw
+                val pitch = home.pitch
                 val world = home.world
                 val homeName = home.name
 
                 usermapConfig?.set("homes.$uuid.$homeName.positionX", positionX)
                 usermapConfig?.set("homes.$uuid.$homeName.positionY", positionY)
                 usermapConfig?.set("homes.$uuid.$homeName.positionZ", positionZ)
+                usermapConfig?.set("homes.$uuid.$homeName.yaw", yaw)
+                usermapConfig?.set("homes.$uuid.$homeName.pitch", pitch)
                 usermapConfig?.set("homes.$uuid.$homeName.world", world)
             }
 
@@ -97,9 +97,11 @@ object Homes {
                 val positionX = usermapConfig?.getDouble("homes.$uuidString.$homeName.positionX") ?: 0.0
                 val positionY = usermapConfig?.getDouble("homes.$uuidString.$homeName.positionY") ?: 100.0
                 val positionZ = usermapConfig?.getDouble("homes.$uuidString.$homeName.positionZ") ?: 0.0
+                val yaw = usermapConfig?.getDouble("homes.$uuidString.$homeName.yaw")?.toFloat() ?: 0.0F
+                val pitch = usermapConfig?.getDouble("homes.$uuidString.$homeName.pitch")?.toFloat() ?: 0.0F
                 val world = usermapConfig?.getString("homes.$uuidString.$homeName.world") ?: "world"
 
-                val home = Home(homeName, world, positionX, positionY, positionZ)
+                val home = Home(homeName, world, positionX, positionY, positionZ, yaw, pitch)
                 homesList.add(home)
             }
 
@@ -125,7 +127,7 @@ object Homes {
         // get the world
         val world = Bukkit.getWorld(home.world)
 
-        val location = Location(world, home.positionX, home.positionY, home.positionZ)
+        val location = Location(world, home.positionX, home.positionY, home.positionZ, home.yaw, home.pitch)
 
         player.teleport(location)
     }

@@ -26,7 +26,7 @@ class TPACommand: CommandExecutor {
             sender.sendMessage("$PREFIX ${ChatColor.RED}You can't teleport to yourself!")
             return true
         }
-        val invitePlayer = YetAnotherHomesPlugin.get().server.onlinePlayers.firstOrNull() {sender.name.lowercase() == it.name.lowercase()}
+        val invitePlayer = YetAnotherHomesPlugin.get().server.onlinePlayers.firstOrNull {sender.name.lowercase() == it.name.lowercase()}
 
         if (invitePlayer == null) {
             sender.sendMessage("$PREFIX ${ChatColor.RED}That player is not online right now!")

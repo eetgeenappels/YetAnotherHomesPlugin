@@ -1,3 +1,3 @@
 package nl.eetgeenappels.homes
 
-data class Home(val name: String, val world: String, val positionX: Double, val positionY: Double, val positionZ: Double)
+data class Home(val name: String, val world: String, val positionX: Double, val positionY: Double, val positionZ: Double, val yaw: Float, val pitch: Float)
