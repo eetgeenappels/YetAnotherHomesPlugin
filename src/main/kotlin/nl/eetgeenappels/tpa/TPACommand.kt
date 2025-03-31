@@ -19,21 +19,21 @@ class TPACommand: CommandExecutor {
             return true
         }
         if (args.isEmpty()) {
-            sender.sendMessage("$PREFIX ${ChatColor.RED}To what person do you want to teleport!")
+            sender.sendMessage("$PREFIX ${ChatColor.RED}Write to what person do you want to teleport!")
             return true
         }
         if (sender.name == args[0]) {
             sender.sendMessage("$PREFIX ${ChatColor.RED}You can't teleport to yourself!")
             return true
         }
-        val invitePlayer = YetAnotherHomesPlugin.get().server.onlinePlayers.firstOrNull {sender.name.lowercase() == it.name.lowercase()}
+        val invitePlayer = YetAnotherHomesPlugin.get().server.onlinePlayers.firstOrNull {args[0].lowercase() == it.name.lowercase()}
 
         if (invitePlayer == null) {
             sender.sendMessage("$PREFIX ${ChatColor.RED}That player is not online right now!")
             return true
         }
 
-        TPAInvites.invite(TPAInvites.TPAInvite(invitePlayer, sender))
+        TPAInvites.inviteTPA(TPAInvites.TPAInvite(invitePlayer, sender))
 
         return true
     }

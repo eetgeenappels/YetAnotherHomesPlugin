@@ -124,12 +124,16 @@ object Homes {
     fun teleportToHome(player: Player, home: Home) {
         player.sendMessage("$PREFIX ${ChatColor.GREEN}Teleporting you to home: ${ChatColor.BLUE}${home.name}")
 
-        // get the world
-        val world = Bukkit.getWorld(home.world)
-
-        val location = Location(world, home.positionX, home.positionY, home.positionZ, home.yaw, home.pitch)
+        val location = getHomeLocation(home)
 
         player.teleport(location)
+    }
+
+    fun getHomeLocation(home: Home): Location {
+        // get the world
+        val world = Bukkit.getWorld(home.world)!!
+
+        return Location(world, home.positionX, home.positionY, home.positionZ, home.yaw, home.pitch)
     }
 
 }
